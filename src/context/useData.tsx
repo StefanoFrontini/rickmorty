@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const url = "https://rickandmortyapi.com/api/character";
-
 // interface APIData {
 // }
 //
 // export interface CleanData {
 // }
+// interface Props {
+//   url: string;
+// }
 
-export const useData = () => {
+export const useData = (url: string) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ show: false, msg: "" });
@@ -19,16 +20,15 @@ export const useData = () => {
   };
 
   useEffect(() => {
-    // const myRegex = /-*[0-9]+\.*[0-9]*/g;
-
     const getData = async () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(url);
         setData(data);
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
         toggleError(true, "Error!");
+        setData({ results: [] });
         setIsLoading(false);
         return;
       }
@@ -36,7 +36,7 @@ export const useData = () => {
     };
 
     getData();
-  }, []);
+  }, [url]);
 
   return { data, isLoading, error };
 };
