@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import type { Episode } from "rickmortyapi";
 
-// interface APIData {
-// }
-//
-// export interface CleanData {
-// }
-// interface Props {
-//   url: string;
-// }
-
-export const useData = (url: string) => {
-  const [data, setData] = useState(null);
+export const useFetchEpisode = (url: string) => {
+  const [data, setData] = useState<Episode[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ show: false, msg: "" });
 
@@ -28,7 +20,6 @@ export const useData = (url: string) => {
       } catch (err) {
         console.log(err);
         toggleError(true, "Error!");
-        setData({ results: [] });
         setIsLoading(false);
         return;
       }

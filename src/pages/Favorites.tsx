@@ -1,7 +1,12 @@
+import { Outlet } from "react-router-dom";
+
 import FavoritesList from "../components/FavoritesList";
-// import { useDataContext } from "../context/context";
 const Favorites = () => {
-  // const { favorites } = useDataContext();
-  return <FavoritesList />;
+  return (
+    <>
+      <Outlet />
+      <FavoritesList />
+    </>
+  );
 };
 export default Favorites;

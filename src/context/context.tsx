@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from "react";
-import { useData } from "./useData";
-// import type { CleanData } from "./useData";
+import { useFetchCharacter } from "../hooks/useFetchCharacter";
+import type { Character } from "rickmortyapi";
+import type { ApiData } from "../hooks/useFetchCharacter";
 
 interface Props {
   children?: ReactNode;
@@ -12,24 +13,31 @@ export interface ErrorType {
 }
 
 interface DataContextType {
-  data: any;
+  data: ApiData | null;
   isLoading: Boolean;
   errorData: ErrorType;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  page: string;
+  changePage: (url: string) => void;
+  searchCharacterName: (name: string) => void;
+  toggleFavorites: (character: Character) => void;
+  favorites: Character[];
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  favoritesDB: Map<any, any>;
+  setFavoritesDB: React.Dispatch<React.SetStateAction<Map<any, any>>>;
 }
 const baseUrl = "https://rickandmortyapi.com/api/character";
-// const favoritesDB = new Map();
 
 const DataContext = React.createContext<DataContextType | undefined>(undefined);
 
 const DataProvider: React.FC<Props> = ({ children }) => {
-  const [characterDetail, setCharacterDetail] = useState({});
   const [page, setPage] = useState("1");
   const [url, setUrl] = useState(baseUrl);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<Character[]>([]);
   const [favoritesDB, setFavoritesDB] = useState(new Map());
+  const [searchValue, setSearchValue] = useState("");
 
-  const { data, isLoading, error: errorData } = useData(url);
+  const { data, isLoading, error: errorData } = useFetchCharacter(url);
   console.log(data);
 
   const searchCharacterName = (name: string) => {
@@ -41,14 +49,15 @@ const DataProvider: React.FC<Props> = ({ children }) => {
     const regex = /page=([1-9]+)/;
     const page = url.match(regex)![1];
     setPage(page);
-    console.log(page);
     setUrl(url);
   };
 
-  const toggleFavorites = (character) => {
+  const toggleFavorites = (character: Character) => {
     if (favoritesDB.has(character.id)) {
       const newFavorites = favorites.filter((el) => el.id !== character.id);
-      const newDB = favoritesDB.delete(character.id);
+      favoritesDB.delete(character.id);
+      const newDB = new Map(favoritesDB);
+
       setFavorites(newFavorites);
       setFavoritesDB(newDB);
     } else {
@@ -64,13 +73,15 @@ const DataProvider: React.FC<Props> = ({ children }) => {
         data,
         isLoading,
         errorData,
-        setCharacterDetail,
-        characterDetail,
         page,
         changePage,
         searchCharacterName,
         toggleFavorites,
         favorites,
+        searchValue,
+        setSearchValue,
+        favoritesDB,
+        setFavoritesDB,
       }}
     >
       {children}

@@ -125,6 +125,10 @@ Buttons
   background: var(--primaryLightColor);
   border-color: var(--primaryLightColor);
 }
+.btn-favorite {
+  background: var(--primaryLightColor);
+  color: var(--primaryColor);
+}
 /* 
 ====== 
 Navbar
@@ -227,6 +231,10 @@ Character List
   row-gap: 2rem;
   column-gap: 2rem;
   /* align-items: start; */
+}
+.pagination {
+  text-align: center;
+  margin-top: 3rem;
 }
 @media screen and (min-width: 576px) {
   .characters-center {

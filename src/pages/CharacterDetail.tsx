@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import axios from "axios";
 import Loading from "../components/Loading";
-const Modal = () => {
+import { useFetchEpisode } from "../hooks/useFetchEpisode";
+
+const CharacterDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
@@ -18,36 +18,18 @@ const Modal = () => {
     type,
     episode,
   } = location.state;
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({ show: false, msg: "" });
+
   const myRegex = /[1-9]+/;
+
   const getId = (str: string) => {
     return str.match(myRegex)![0];
   };
-  const episodeId = episode.map((el) => getId(el));
+
+  const episodeId = episode.map((el: string): string => getId(el));
+
   const url = `https://rickandmortyapi.com/api/episode/[${episodeId.toString()}]`;
-  const toggleError = (show = false, msg = "") => {
-    setError({ show, msg });
-  };
 
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      try {
-        const { data } = await axios.get(url);
-        setData(data);
-      } catch (error) {
-        console.log(error);
-        toggleError(true, "Error!");
-        setIsLoading(false);
-        return;
-      }
-      setIsLoading(false);
-    };
-
-    getData();
-  }, [url]);
+  const { data, isLoading, error: errorData } = useFetchEpisode(url);
 
   if (isLoading) {
     return <Loading />;
@@ -88,7 +70,7 @@ const Modal = () => {
                 ) : null;
               })}
           </p>
-          <button className="btn btn-primary" onClick={() => navigate("/")}>
+          <button className="btn btn-primary" onClick={() => navigate(-1)}>
             Close
           </button>
         </div>
@@ -96,4 +78,4 @@ const Modal = () => {
     </section>
   );
 };
-export default Modal;
+export default CharacterDetail;

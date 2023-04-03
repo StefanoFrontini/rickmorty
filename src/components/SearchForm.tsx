@@ -1,41 +1,44 @@
 import { useDataContext } from "../context/context";
 
 import { useRef, useEffect } from "react";
+
 const SearchForm = () => {
-  const { searchCharacterName } = useDataContext();
-  const searchValue = useRef<HTMLInputElement>(null);
-  let timer: number | null = null;
+  const { searchCharacterName, searchValue, setSearchValue } = useDataContext();
+  const searchValueRef = useRef<HTMLInputElement>(null);
+  let timerRef = useRef("");
 
-  useEffect(() => {
-    searchValue.current && searchValue.current.focus();
-  }, []);
-
-  const searchCharacter = () => {
-    if (timer) {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        searchValue.current && searchCharacterName(searchValue.current.value);
-      }, 500);
-    } else {
-      timer = setTimeout(() => {
-        searchValue.current && searchCharacterName(searchValue.current.value);
-      }, 500);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    if (timerRef.current) {
+      clearTimeout(+timerRef.current);
     }
+    const timer = setTimeout(() => {
+      searchCharacterName(e.target.value);
+    }, 1000);
+    timerRef.current = timer.toString();
   };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+  useEffect(() => {
+    if (searchValueRef.current) {
+      searchValueRef.current.focus();
+    }
+  }, []);
+
   return (
     <section className="section search">
       <form className="search-form" onSubmit={handleSubmit}>
         <div className="form-control">
-          <label htmlFor="name">search your favorite character</label>
+          <label htmlFor="search">search your favorite character</label>
           <input
             type="text"
-            name="name"
-            id="name"
-            ref={searchValue}
-            onChange={searchCharacter}
+            name="search"
+            id="search"
+            value={searchValue}
+            onChange={handleChange}
           />
         </div>
       </form>
