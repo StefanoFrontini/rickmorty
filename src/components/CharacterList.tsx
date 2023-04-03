@@ -1,16 +1,16 @@
 import Character from "../components/Character";
 import Loading from "../components/Loading";
 import { useDataContext } from "../context/context";
-const CharacterList = ({ children }) => {
+const CharacterList = () => {
   const { data, isLoading, page } = useDataContext();
   console.log("data", data);
   if (isLoading) {
     return <Loading />;
   }
   if (data) {
-    // const {
-    //   info: { count, pages },
-    // } = data;
+    const {
+      info: { count, pages },
+    } = data;
     if (data.results.length < 1) {
       return (
         <h2 className="section-title">
@@ -22,8 +22,7 @@ const CharacterList = ({ children }) => {
       <section className="section">
         <h2 className="section-title">characters</h2>
         <div className="section-results">
-          {/* <h3>{`Showing ${page} to ${pages} of ${count} results`}</h3> */}
-          {children}
+          <h3>{`Showing ${page} to ${pages} of ${count} results`}</h3>
         </div>
         <div className="characters-center">
           {data.results.map((item) => {

@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/24/solid";
+import { useDataContext } from "../context/context";
 const Character = (props) => {
-  const { name, image, id } = props;
+  const { toggleFavorites } = useDataContext();
+  const { name, image } = props;
   const location = useLocation();
-  const favorites = () => {
-    console.log("id", id);
+  const handleChange = () => {
+    toggleFavorites(props);
   };
   return (
     <Link to="modal" state={{ ...props, background: location }}>
@@ -16,7 +18,7 @@ const Character = (props) => {
             className="btn btn-primary"
             onClick={(e) => {
               e.preventDefault();
-              favorites();
+              handleChange();
             }}
           >
             Add to favorites

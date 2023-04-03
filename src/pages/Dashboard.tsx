@@ -1,9 +1,9 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import SearchForm from "../components/SearchForm";
 import CharacterList from "../components/CharacterList";
 import { useDataContext } from "../context/context";
 import PageBtnContainer from "../components/PageBtnContainer";
-import ResultsStats from "../components/ResultsStats";
+// import ResultsStats from "../components/ResultsStats";
 const Dashboard = () => {
   const location = useLocation();
   const { data, isLoading } = useDataContext();
@@ -19,11 +19,7 @@ const Dashboard = () => {
       <Outlet />
       <main>
         <SearchForm />
-        {data && (
-          <CharacterList data={data}>
-            <ResultsStats />
-          </CharacterList>
-        )}
+        {data && <CharacterList data={data} />}
         {data && <PageBtnContainer />}
       </main>
     </>

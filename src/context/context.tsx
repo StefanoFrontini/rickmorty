@@ -18,6 +18,7 @@ interface DataContextType {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 const baseUrl = "https://rickandmortyapi.com/api/character";
+// const favoritesDB = new Map();
 
 const DataContext = React.createContext<DataContextType | undefined>(undefined);
 
@@ -25,9 +26,12 @@ const DataProvider: React.FC<Props> = ({ children }) => {
   const [characterDetail, setCharacterDetail] = useState({});
   const [page, setPage] = useState("1");
   const [url, setUrl] = useState(baseUrl);
+  const [favorites, setFavorites] = useState([]);
+  const [favoritesDB, setFavoritesDB] = useState(new Map());
 
   const { data, isLoading, error: errorData } = useData(url);
   console.log(data);
+
   const searchCharacterName = (name: string) => {
     const url = `${baseUrl}/?name=${name}`;
     setUrl(url);
@@ -40,6 +44,20 @@ const DataProvider: React.FC<Props> = ({ children }) => {
     console.log(page);
     setUrl(url);
   };
+
+  const toggleFavorites = (character) => {
+    if (favoritesDB.has(character.id)) {
+      const newFavorites = favorites.filter((el) => el.id !== character.id);
+      const newDB = favoritesDB.delete(character.id);
+      setFavorites(newFavorites);
+      setFavoritesDB(newDB);
+    } else {
+      const newDB = favoritesDB.set(character.id, true);
+      const newFavorites = [...favorites, character];
+      setFavorites(newFavorites);
+      setFavoritesDB(newDB);
+    }
+  };
   return (
     <DataContext.Provider
       value={{
@@ -51,6 +69,8 @@ const DataProvider: React.FC<Props> = ({ children }) => {
         page,
         changePage,
         searchCharacterName,
+        toggleFavorites,
+        favorites,
       }}
     >
       {children}

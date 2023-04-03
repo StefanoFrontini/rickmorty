@@ -1,8 +1,7 @@
+import FavoritesList from "../components/FavoritesList";
+// import { useDataContext } from "../context/context";
 const Favorites = () => {
-  return (
-    <div>
-      <h1>Favorites</h1>
-    </div>
-  );
+  // const { favorites } = useDataContext();
+  return <FavoritesList />;
 };
 export default Favorites;
