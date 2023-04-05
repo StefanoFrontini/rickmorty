@@ -16,10 +16,11 @@ export const useFetchEpisode = (url: string) => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(url);
+        toggleError();
         setData(data);
       } catch (err) {
         console.log(err);
-        toggleError(true, "Error!");
+        toggleError(true, "oops! something went wrong!");
         setIsLoading(false);
         return;
       }

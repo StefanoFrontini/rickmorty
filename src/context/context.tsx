@@ -15,7 +15,7 @@ export interface ErrorType {
 interface DataContextType {
   data: ApiData | null;
   isLoading: Boolean;
-  errorData: ErrorType;
+  error: ErrorType;
   page: string;
   changePage: (url: string) => void;
   searchCharacterName: (name: string) => void;
@@ -24,7 +24,7 @@ interface DataContextType {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
   favoritesDB: Map<any, any>;
-  setFavoritesDB: React.Dispatch<React.SetStateAction<Map<any, any>>>;
+  setFavoritesDB: React.Dispatch<React.SetStateAction<Map<number, boolean>>>;
 }
 const baseUrl = "https://rickandmortyapi.com/api/character";
 
@@ -37,7 +37,7 @@ const DataProvider: React.FC<Props> = ({ children }) => {
   const [favoritesDB, setFavoritesDB] = useState(new Map());
   const [searchValue, setSearchValue] = useState("");
 
-  const { data, isLoading, error: errorData } = useFetchCharacter(url);
+  const { data, isLoading, error } = useFetchCharacter(url);
   console.log(data);
 
   const searchCharacterName = (name: string) => {
@@ -72,7 +72,7 @@ const DataProvider: React.FC<Props> = ({ children }) => {
       value={{
         data,
         isLoading,
-        errorData,
+        error,
         page,
         changePage,
         searchCharacterName,

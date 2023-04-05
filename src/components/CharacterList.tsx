@@ -10,9 +10,11 @@ const CharacterList = () => {
   if (data) {
     if (data.results.length < 1) {
       return (
-        <h2 className="section-title">
-          no characters matched your search criteria
-        </h2>
+        <section className="section">
+          <h2 className="section-title">
+            no characters matched your search criteria
+          </h2>
+        </section>
       );
     }
     const { info } = data;

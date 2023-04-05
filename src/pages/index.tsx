@@ -1,6 +1,6 @@
 import Dashboard from "./Dashboard";
 import Favorites from "./Favorites";
-import Error from "./Error";
+import ErrorPage from "./ErrorPage";
 import CharacterDetail from "./CharacterDetail";
 
-export { Dashboard, Favorites, Error, CharacterDetail };
+export { Dashboard, Favorites, ErrorPage, CharacterDetail };

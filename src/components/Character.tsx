@@ -15,7 +15,6 @@ const Character = (props) => {
         <div className="character-footer">
           <h3>{name}</h3>
           <button
-            // className="btn btn-primary"
             className={
               favoritesDB.has(id) ? "btn btn-favorite" : "btn btn-primary"
             }
@@ -24,9 +23,7 @@ const Character = (props) => {
               handleChange();
             }}
           >
-            <span>
-              {favoritesDB.has(id) ? "remove from" : "add to"} favorites
-            </span>{" "}
+            <span>like</span>{" "}
             <StarIcon style={{ width: "30", verticalAlign: "middle" }} />
           </button>
         </div>

@@ -4,7 +4,11 @@ import { useDataContext } from "../context/context";
 const FavoritesList = () => {
   const { favorites } = useDataContext();
   if (favorites.length < 1) {
-    return <h2 className="section-title">no favorites characters</h2>;
+    return (
+      <section className="section">
+        <h2 className="section-title">no favorites characters</h2>
+      </section>
+    );
   }
   return (
     <section className="section">

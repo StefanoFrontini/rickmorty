@@ -24,41 +24,45 @@ export const useFetchCharacter = (url: string) => {
 
   useEffect(() => {
     const getData = async () => {
+      toggleError();
       setIsLoading(true);
       try {
         const { data } = await axios.get(url);
         setData(data);
-      } catch (err) {
+      } catch (err: any) {
         console.log(err);
-        toggleError(true, "Error!");
-        const emptyData: ApiData = {
-          status: 404,
-          statusMessage: "Request failed with status code 404",
-          results: [],
-          data: {
-            id: 0,
-            gender: "unknown",
-            image: "",
-            location: { name: "", url: "" },
-            name: "",
-            origin: { name: "", url: "" },
-            species: "",
-            status: "unknown",
-            type: "",
-            url: "",
-            episode: [""],
-            created: "",
-          },
-          info: {
-            count: 0,
-            pages: 0,
-            next: null,
-            prev: null,
-          },
-        };
-        setData(emptyData);
-        setIsLoading(false);
-        return;
+        if (err?.response?.data?.error === "There is nothing here") {
+          const emptyData: ApiData = {
+            status: 404,
+            statusMessage: "Request failed with status code 404",
+            results: [],
+            data: {
+              id: 0,
+              gender: "unknown",
+              image: "",
+              location: { name: "", url: "" },
+              name: "",
+              origin: { name: "", url: "" },
+              species: "",
+              status: "unknown",
+              type: "",
+              url: "",
+              episode: [""],
+              created: "",
+            },
+            info: {
+              count: 0,
+              pages: 0,
+              next: null,
+              prev: null,
+            },
+          };
+          setData(emptyData);
+          setIsLoading(false);
+          return;
+        } else {
+          toggleError(true, "oops! something went wrong!");
+        }
       }
       setIsLoading(false);
     };

@@ -1,5 +1,4 @@
 import { useDataContext } from "../context/context";
-
 import { useRef, useEffect } from "react";
 
 const SearchForm = () => {
