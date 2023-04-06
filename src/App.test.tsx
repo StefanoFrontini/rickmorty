@@ -18,22 +18,8 @@ describe("App", () => {
       </BrowserRouter>
     );
   });
-  test("add to favorite and navigate to favorites", async () => {
-    const user = userEvent.setup();
-    // verify page content for expected route after navigating
-    const buttons = await screen.findAllByRole("button");
-    await user.click(buttons[0]);
-    //
-    await user.click(screen.getByRole("link", { name: "favorites" }));
-    const h3 = screen.getAllByRole("heading", {
-      level: 3,
-    });
-    expect(h3[0].textContent).toMatch(/rick sanchez/i);
-  });
+
   test("Renders Rick & Morty DB link on the header", () => {
-    //ARRANGE
-    //ACT
-    //EXPECT
     expect(
       screen.getByRole("link", { name: "Rick & Morty DB" })
     ).toHaveAttribute("href", "/");
@@ -52,7 +38,7 @@ describe("App", () => {
     expect(h1.textContent).toMatch(/characters/i);
   });
 
-  test("Renders Results data", async () => {
+  test("Renders results data", async () => {
     const h4 = await screen.findByRole("heading", {
       level: 4,
     });
@@ -72,20 +58,30 @@ describe("App", () => {
     expect(h3.textContent).toMatch(/supernova/i);
   });
 
-  test("navigating to favorites route", async () => {
+  test("Navigating to favorites route", async () => {
     const user = userEvent.setup();
-    // verify page content for expected route after navigating
     await user.click(screen.getByText(/favorites/i));
     const h1 = screen.getByRole("heading", {
       level: 1,
     });
-    expect(h1.textContent).toMatch(/favorites/);
+    expect(h1.textContent).toMatch(/no favorite/);
+  });
+
+  test("Add to favorite and navigate to favorites", async () => {
+    const user = userEvent.setup();
+    const buttons = await screen.findAllByRole("button");
+    await user.click(buttons[0]);
+    await user.click(screen.getByRole("link", { name: "favorites" }));
+    const h3 = screen.getAllByRole("heading", {
+      level: 3,
+    });
+    expect(h3[0].textContent).toMatch(/rick sanchez/i);
   });
 });
 
-describe("Memory Router", () => {
+describe("Renders modal and bad page", () => {
   test("landing on a bad page", () => {
-    const badRoute = "/some/bad/route";
+    const badRoute = "/badroute";
     render(
       <MemoryRouter initialEntries={[badRoute]}>
         <DataProvider>
@@ -93,10 +89,10 @@ describe("Memory Router", () => {
         </DataProvider>
       </MemoryRouter>
     );
-    // verify navigation to "no match" route
     expect(screen.getByText(/dead end/i)).toBeInTheDocument();
   });
-  test("open modal", async () => {
+
+  test("Open modal", async () => {
     const route = "/character-detail";
     const state = {
       name: "Rick Sanchez",

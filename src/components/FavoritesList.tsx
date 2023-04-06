@@ -6,7 +6,7 @@ const FavoritesList = () => {
   if (favorites.length < 1) {
     return (
       <section className="section">
-        <h1 className="section-title">no favorites characters</h1>
+        <h1 className="section-title">no favorite characters</h1>
       </section>
     );
   }

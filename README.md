@@ -13,6 +13,7 @@ The Dashboard allows the visualization of the characters of "Rick and Morty".
     - [Rick \& Morty API](#rick--morty-api)
     - [React Context API](#react-context-api)
     - [Modal](#modal)
+    - [Performance](#performance)
   - [Testing](#testing)
   - [References](#references)
 
@@ -24,12 +25,12 @@ The dashboard should display these features:
 - Detail of the character visible in a modal;
 - Have search input;
 - Pagination;
-- Add/remove a character to your favorite; characters list
+- Add/remove a character to your favorite characters list;
 - See list of favorite characters;
 
 ## Links
 
-- [Live Site URL](https://energy-report.netlify.app/)
+- [Live Site URL](https://rickmortydb.netlify.app/)
 
 ## Setup
 
@@ -70,14 +71,28 @@ To get the raw data from the [Rick & Morty API](https://rickandmortyapi.com/docu
 Context API provides a way to pass data through the component tree without having to pass props down manually at every level (props drilling). I decided to use it to keep the code organized.
 
 ### Modal
+
 The modal has been implemented by using the React Router useLocation hook.
-The `background` state is the location that we were at when one of the characters links was clicked. If it's there, it is used as the location for the <Routes>so characters are shown in the background, behind the modal.
+The "background" state is the location that we were at when one of the characters links was clicked. If it's there, it is used as the location for the Routes so characters are shown in the background, behind the modal.
 
 React Router let you also pass the state prop. I used the state prop to pass the data from the home route to the modal.
 
+### Performance
+Each character card on the Home page has to loop the favorite array to know how to render the Like button which is O(n) operation. So I decided to use a Javascript Map object which could be represented as a hash table data structure with O(1) lookup, insertion and deletion.
+
 ## Testing
 
-Unit tests involve
+The unit tests performed concern the file app.tsx and test the following features:
+
+- Renders Rick & Morty DB link on the header
+- Renders user input on search form
+- Renders the word Characters
+- Renders results data
+- Renders results on user input
+- Navigating to favorites route
+- Add to favorite and navigate to favorites
+- Landing on a bad page
+- Open modal
 
 I used these tools:
 

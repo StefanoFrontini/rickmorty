@@ -81,19 +81,11 @@ Buttons
   background: transparent;
   border-radius: var(--mainBorderRadius);
 }
-/* .btn:hover { */
-/*   background: var(--primaryColor); */
-/*   color: var(--mainWhite); */
-/* } */
 .btn-primary {
   background: var(--primaryColor);
   color: var(--mainWhite);
   border-color: transparent;
 }
-/* .btn-primary:hover { */
-/*   background: var(--primaryLightColor); */
-/*   color: var(--primaryColor); */
-/* } */
 .btn-favorite {
   background: var(--primaryLightColor);
   color: var(--primaryColor);
@@ -219,10 +211,6 @@ Character
 .character-footer h3 {
   font-size: 2rem;
 }
-/* .character-footer p { */
-/*   color: var(--darkGrey); */
-/*   margin-bottom: 0.5rem; */
-/* } */
 .character-footer button {
   margin-top: 2rem;
 }
