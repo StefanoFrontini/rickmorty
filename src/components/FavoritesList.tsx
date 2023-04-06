@@ -6,19 +6,19 @@ const FavoritesList = () => {
   if (favorites.length < 1) {
     return (
       <section className="section">
-        <h2 className="section-title">no favorites characters</h2>
+        <h1 className="section-title">no favorites characters</h1>
       </section>
     );
   }
   return (
     <section className="section">
-      <h2 className="section-title">favorites</h2>
+      <h1 className="section-title">favorites</h1>
       <div className="section-results">
-        <h3>
+        <h4>
           {favorites.length === 1
             ? `${favorites.length} result`
             : `${favorites.length} results`}
-        </h3>
+        </h4>
       </div>
       <div className="characters-center">
         {favorites.map((item) => {

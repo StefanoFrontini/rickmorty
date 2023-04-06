@@ -20,9 +20,9 @@ const CharacterList = () => {
     const { info } = data;
     return (
       <section className="section">
-        <h2 className="section-title">characters</h2>
+        <h1 className="section-title">characters</h1>
         <div className="section-results">
-          <h3>{`Showing ${page} to ${info.pages} of ${info.count} results`}</h3>
+          <h4>{`Showing ${page} to ${info.pages} of ${info.count} results`}</h4>
         </div>
         <div className="characters-center">
           {data.results.map((item) => {

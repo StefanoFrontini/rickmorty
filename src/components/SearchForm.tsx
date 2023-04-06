@@ -36,6 +36,7 @@ const SearchForm = () => {
             type="text"
             name="search"
             id="search"
+            aria-label="search"
             value={searchValue}
             onChange={handleChange}
           />

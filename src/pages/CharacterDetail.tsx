@@ -37,8 +37,8 @@ const CharacterDetail = () => {
 
   if (error.msg) {
     return (
-      <section className="modalDiv">
-        <div className="modal">
+      <section className="character-detail">
+        <div className="character-modal">
           <div className="character-content">
             <Error {...error} />
             <div className="character-button">
@@ -53,8 +53,8 @@ const CharacterDetail = () => {
   }
 
   return (
-    <section className="modalDiv">
-      <div className="modal">
+    <section className="character-detail">
+      <div className="character-modal">
         <div className="character-content">
           <h2 className="section-title">{name}</h2>
           <img src={image} alt={name} />

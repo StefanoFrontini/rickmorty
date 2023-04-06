@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { useDataContext } from "../context/context";
-const Character = (props) => {
+import type { Character } from "rickmortyapi";
+
+const Character: React.FC<Character> = (props) => {
   const { toggleFavorites, favoritesDB } = useDataContext();
   const { name, image, id } = props;
   const location = useLocation();
@@ -23,8 +25,7 @@ const Character = (props) => {
               handleChange();
             }}
           >
-            <span>like</span>{" "}
-            <StarIcon style={{ width: "30", verticalAlign: "middle" }} />
+            <span>like</span> <StarIcon className="star-icon" />
           </button>
         </div>
       </article>

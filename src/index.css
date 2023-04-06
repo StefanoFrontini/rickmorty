@@ -81,19 +81,19 @@ Buttons
   background: transparent;
   border-radius: var(--mainBorderRadius);
 }
-.btn:hover {
-  background: var(--primaryColor);
-  color: var(--mainWhite);
-}
+/* .btn:hover { */
+/*   background: var(--primaryColor); */
+/*   color: var(--mainWhite); */
+/* } */
 .btn-primary {
   background: var(--primaryColor);
   color: var(--mainWhite);
   border-color: transparent;
 }
-.btn-primary:hover {
-  background: var(--primaryLightColor);
-  color: var(--primaryColor);
-}
+/* .btn-primary:hover { */
+/*   background: var(--primaryLightColor); */
+/*   color: var(--primaryColor); */
+/* } */
 .btn-favorite {
   background: var(--primaryLightColor);
   color: var(--primaryColor);
@@ -226,6 +226,10 @@ Character
 .character-footer button {
   margin-top: 2rem;
 }
+.star-icon {
+  width: 30px;
+  vertical-align: middle;
+}
 
 /* 
 ====== 
@@ -270,7 +274,7 @@ Character Detail
 ======
 */
 
-.modalDiv {
+.character-detail {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -279,7 +283,7 @@ Character Detail
   background-color: rgba(91, 112, 131, 0.4);
   overflow: auto;
 }
-.modal {
+.character-modal {
   width: var(--smallWidth);
   max-width: var(--fullWidth);
   background-color: white;
