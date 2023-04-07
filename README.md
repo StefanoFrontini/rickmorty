@@ -21,7 +21,7 @@ The Dashboard allows the visualization of the characters of "Rick and Morty".
 
 The dashboard should display these features:
 
-- Character List screen;
+- Character list screen;
 - Detail of the character visible in a modal;
 - Have search input;
 - Pagination;
@@ -61,10 +61,9 @@ For the UI I used CSS.
 
 To get the raw data from the [Rick & Morty API](https://rickandmortyapi.com/documentation)I decided to use these endpoints:
 
-- https://rickandmortyapi.com/api/character to get all characters.
-- https://rickandmortyapi.com/api/character/?name=rick to get the character with name: "Rick"
-- https://rickandmortyapi.com/api/episode/[10,28] to get for instance episode n. 10 and 28
-
+- https://rickandmortyapi.com/api/character to get all characters;
+- https://rickandmortyapi.com/api/character/?name=rick to get the character with name: "rick";
+- https://rickandmortyapi.com/api/episode/[10,28] to get for instance episode n. 10 and 28.
 
 ### React Context API
 
@@ -73,12 +72,12 @@ Context API provides a way to pass data through the component tree without havin
 ### Modal
 
 The modal has been implemented by using the React Router useLocation hook.
-The "background" state is the location that we were at when one of the characters links was clicked. If it's there, it is used as the location for the Routes so characters are shown in the background, behind the modal.
 
-React Router let you also pass the state prop. I used the state prop to pass the data from the home route to the modal.
+The useLocation hook let you also pass the state prop. I used the state prop to pass the data from the home route to the modal.
 
 ### Performance
-Each character card on the Home page has to loop the favorite array to know how to render the Like button which is O(n) operation. So I decided to use a Javascript Map object which could be represented as a hash table data structure with O(1) lookup, insertion and deletion.
+
+Each character card on the home page has to loop the favorite array to know how to render the Like button which is O(n) operation. So I decided to use a Javascript Map object which could be represented as a hash table data structure with O(1) lookup, insertion and deletion.
 
 ## Testing
 
